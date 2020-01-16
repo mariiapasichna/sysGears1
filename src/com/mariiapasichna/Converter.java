@@ -17,12 +17,12 @@ public class Converter {
     public Object convert() {
         nextChar();
         int startPos = this.pos;
-        double x = 0;
+
         if ((ch >= '0' && ch <= '9') || ch == '.' || ch == '-') {
             while ((ch >= '0' && ch <= '9') || ch == '.' || ch == '-') {
                 nextChar();
             }
-            x = Double.parseDouble(str.substring(startPos, this.pos));
+            double x = Double.parseDouble(str.substring(startPos, this.pos));
             ch = str.charAt(str.length() - 1);
             switch (ch) {
                 case 'C':
@@ -37,6 +37,8 @@ public class Converter {
                 default:
                     throw new RuntimeException("Unexpected: " + (char) ch);
             }
+        } else {
+            throw new RuntimeException("Unexpected: " + (char) ch);
         }
         return JSONObject;
     }
