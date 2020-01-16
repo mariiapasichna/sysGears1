@@ -14,7 +14,7 @@ public class Main {
 */
 
     public static void main(String[] args) {
-        Converter converter = new Converter("-24C");
+        Converter converter = new Converter("    -24   C  ");
         converter.convert();
     }
 }

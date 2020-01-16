@@ -68,16 +68,8 @@ public class Converter {
         System.out.println(jo);
     }
 
-    private boolean eat(int charToEat) {
-        while (ch == ' ') nextChar();
-        if (ch == charToEat) {
-            nextChar();
-            return true;
-        }
-        return false;
-    }
-
     private void nextChar() {
+        str = str.trim();
         ch = (++pos < str.length()) ? str.charAt(pos) : -1;
     }
 }
