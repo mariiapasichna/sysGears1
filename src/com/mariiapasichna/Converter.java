@@ -4,37 +4,28 @@ import org.json.JSONObject;
 
 public class Converter {
     private String str;
-    private int pos = -1;
-    private int ch;
 
     public Converter(String str) {
         this.str = str;
     }
 
     public void convert() {
-        nextChar();
-        int startPos = this.pos;
-        if ((ch >= '0' && ch <= '9') || ch == '.' || ch == '-') {
-            while ((ch >= '0' && ch <= '9') || ch == '.' || ch == '-') {
-                nextChar();
-            }
-            double x = Double.parseDouble(str.substring(startPos, this.pos));
-            ch = str.charAt(str.length() - 1);
-            switch (ch) {
-                case 'C':
-                    convertCelsius(x);
-                    break;
-                case 'K':
-                    convertKelvin(x);
-                    break;
-                case 'F':
-                    convertFahrenheit(x);
-                    break;
-                default:
-                    throw new RuntimeException("Unexpected: " + (char) ch);
-            }
-        } else {
-            throw new RuntimeException("Unexpected: " + (char) ch);
+        str = str.trim();
+        str = str.replace(',', '.');
+        double x = Double.parseDouble(str.substring(0, str.length() - 2));
+        char ch = str.charAt(str.length() - 1);
+        switch (ch) {
+            case 'C':
+                convertCelsius(x);
+                break;
+            case 'K':
+                convertKelvin(x);
+                break;
+            case 'F':
+                convertFahrenheit(x);
+                break;
+            default:
+                throw new RuntimeException("Unexpected: " + ch);
         }
     }
 
@@ -63,11 +54,5 @@ public class Converter {
         jo.put("K", k);
         jo.put("F", f);
         System.out.println(jo);
-    }
-
-    private void nextChar() {
-        str = str.trim();
-        str = str.replace(',', '.');
-        ch = (++pos < str.length()) ? str.charAt(pos) : -1;
     }
 }
