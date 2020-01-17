@@ -67,6 +67,7 @@ public class Converter {
 
     private void nextChar() {
         str = str.trim();
+        str = str.replace(',', '.');
         ch = (++pos < str.length()) ? str.charAt(pos) : -1;
     }
 }
